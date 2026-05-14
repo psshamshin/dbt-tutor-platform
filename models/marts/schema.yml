@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: mart_tutor_performance
+    description: >
+      Витрина эффективности репетиторов. Содержит агрегированную статистику
+      по каждому репетитору: количество проведённых уроков, доход, средний
+      рейтинг, категория эффективности.
+    columns:
+      - name: tutor_id
+        description: "Уникальный идентификатор репетитора"
+        data_tests:
+          - unique
+          - not_null
+      - name: total_revenue
+        description: "Суммарный подтверждённый доход репетитора (руб.)"
+      - name: avg_rating
+        description: "Средняя оценка репетитора по отзывам учеников"
+      - name: performance_tier
+        description: "Категория репетитора: Топ / Хороший / Новый / Нет уроков"
+
+  - name: mart_student_progress
+    description: >
+      Витрина прогресса учеников. Содержит статистику по каждому ученику:
+      посещённые занятия, изученные предметы, потраченные средства,
+      любимый предмет.
+    columns:
+      - name: student_id
+        description: "Уникальный идентификатор ученика"
+        data_tests:
+          - unique
+          - not_null
+      - name: student_tier
+        description: "Категория ученика: Активный / Регулярный / Начинающий / Нет занятий"
+
+  - name: mart_lesson_schedule
+    description: >
+      Витрина расписания занятий. Детальный журнал всех занятий с информацией
+      о репетиторе, ученике, предмете и оплате.
+    columns:
+      - name: lesson_id
+        description: "Уникальный идентификатор занятия"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: mart_payment_summary
+    description: >
+      Витрина финансовой аналитики. Сводка по оплатам в разрезе месяца,
+      репетитора, предмета и способа оплаты.
+
+  - name: mart_subject_popularity
+    description: >
+      Витрина популярности предметов. Рейтинг предметов по количеству
+      занятий, выручке и средней оценке.
+    columns:
+      - name: subject_id
+        description: "Уникальный идентификатор предмета"
+        data_tests:
+          - unique
+          - not_null
+      - name: popularity_rank
+        description: "Ранг предмета по популярности (1 — самый популярный)"

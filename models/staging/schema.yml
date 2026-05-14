@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: stg_subjects
+    description: "Справочник предметов репетиторской платформы"
+    columns:
+      - name: subject_id
+        description: "Уникальный идентификатор предмета"
+        data_tests:
+          - unique
+          - not_null
+      - name: subject_name
+        description: "Название предмета"
+        data_tests:
+          - not_null
+      - name: category
+        description: "Категория предмета"
+        data_tests:
+          - not_null
+
+  - name: stg_tutors
+    description: "Справочник репетиторов"
+    columns:
+      - name: tutor_id
+        description: "Уникальный идентификатор репетитора"
+        data_tests:
+          - unique
+          - not_null
+      - name: full_name
+        description: "ФИО репетитора"
+        data_tests:
+          - not_null
+      - name: hourly_rate
+        description: "Стоимость занятия за час (руб.)"
+        data_tests:
+          - not_null
+
+  - name: stg_students
+    description: "Справочник учеников"
+    columns:
+      - name: student_id
+        description: "Уникальный идентификатор ученика"
+        data_tests:
+          - unique
+          - not_null
+      - name: full_name
+        description: "ФИО ученика"
+        data_tests:
+          - not_null
+
+  - name: stg_lessons
+    description: "Журнал занятий"
+    columns:
+      - name: lesson_id
+        description: "Уникальный идентификатор занятия"
+        data_tests:
+          - unique
+          - not_null
+      - name: status
+        description: "Статус занятия"
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['completed', 'cancelled', 'scheduled']
+
+  - name: stg_payments
+    description: "Журнал платежей"
+    columns:
+      - name: payment_id
+        description: "Уникальный идентификатор платежа"
+        data_tests:
+          - unique
+          - not_null
+      - name: status
+        description: "Статус платежа"
+        data_tests:
+          - accepted_values:
+              values: ['paid', 'refunded', 'pending']
+
+  - name: stg_reviews
+    description: "Отзывы учеников о занятиях"
+    columns:
+      - name: review_id
+        description: "Уникальный идентификатор отзыва"
+        data_tests:
+          - unique
+          - not_null
+      - name: rating
+        description: "Оценка от 1 до 5"
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]

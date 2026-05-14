@@ -1,0 +1,31 @@
+name: 'tutor_platform'
+version: '1.0.0'
+
+profile: 'tutor_platform'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  tutor_platform:
+    +schema: raw
+    students:
+      +column_types:
+        parent_contact: varchar
+
+models:
+  tutor_platform:
+    staging:
+      +schema: staging
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table
